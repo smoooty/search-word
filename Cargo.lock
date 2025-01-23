@@ -60,14 +60,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1261fe7e33c73b354eab43b1273a57c8f967d0391e80353e51f764ac02cf6775"
 
 [[package]]
-name = "play"
-version = "0.1.0"
-dependencies = [
- "tempfile",
- "walkdir",
-]
-
-[[package]]
 name = "rustix"
 version = "0.38.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -87,6 +79,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "93fc1dc3aaa9bfed95e02e6eadabb4baf7e3078b0bd1b4d7b6b0b68378900502"
 dependencies = [
  "winapi-util",
+]
+
+[[package]]
+name = "search-word"
+version = "0.1.0"
+dependencies = [
+ "tempfile",
+ "walkdir",
 ]
 
 [[package]]
