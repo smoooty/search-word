@@ -1,4 +1,4 @@
-
+### use:
 ```bash
 search-word <term> [directory]
 
