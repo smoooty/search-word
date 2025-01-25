@@ -46,6 +46,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: arm64-binary-${{ steps.version.outputs.version }}
-          path: target/aarch64-unknown-linux-gnu/release/your-binary-name
+          path: target/aarch64-unknown-linux-gnu/release/search-word
           compression-level: 9
           overwrite: true
