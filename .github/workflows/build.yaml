@@ -19,10 +19,15 @@ jobs:
           target: aarch64-unknown-linux-gnu
           override: true
 
-      - name: Install ARM64 cross-compilation tools
+      - name: Install ARM64 cross-compilation dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y gcc-aarch64-linux-gnu
+          sudo apt-get install -y gcc-aarch64-linux-gnu libc6-dev-arm64-cross
+
+      - name: Configure cross-compilation
+        run: |
+          echo '[target.aarch64-unknown-linux-gnu]' >> ~/.cargo/config.toml
+          echo 'linker = "aarch64-linux-gnu-gcc"' >> ~/.cargo/config.toml
 
       - name: Cache cargo dependencies
         uses: actions/cache@v4
