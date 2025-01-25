@@ -1,0 +1,46 @@
+name: Rust ARM64 Build
+
+on: [push, pull_request]
+
+jobs:
+  build-arm64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Get version or commit hash
+        id: version
+        run: echo "version=$(git describe --always --dirty)" >> $GITHUB_OUTPUT
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: aarch64-unknown-linux-gnu
+          override: true
+
+      - name: Install ARM64 cross-compilation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu
+
+      - name: Cache cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build for ARM64
+        run: |
+          cargo build --target aarch64-unknown-linux-gnu --release
+
+      - name: Upload ARM64 binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: arm64-binary-${{ steps.version.outputs.version }}
+          path: target/aarch64-unknown-linux-gnu/release/your-binary-name
+          compression-level: 9
+          overwrite: true
