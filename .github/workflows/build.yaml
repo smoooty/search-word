@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: binary-${{ steps.version.outputs.version }}
-          path: target/aarch64-apple-darwin/release/your-binary-name
+          path: target/aarch64-apple-darwin/release/search-word
           compression-level: 9
           overwrite: true
 
@@ -36,4 +36,4 @@ jobs:
         run: |
           echo "### Binary Download 📦" >> $GITHUB_STEP_SUMMARY
           echo "[Download binary-${{ steps.version.outputs.version }}](${{ steps.upload.outputs.artifact-url }})" >> $GITHUB_STEP_SUMMARY
-          echo "curl -L ${{ steps.upload.outputs.artifact-url }} -o search-word && chmod +x search-word" >> $GITHUB_STEP_SUMMARY
+          echo "`curl -L ${{ steps.upload.outputs.artifact-url }} -o search-word && chmod +x search-word`" >> $GITHUB_STEP_SUMMARY
